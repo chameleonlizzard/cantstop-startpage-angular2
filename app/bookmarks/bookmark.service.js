@@ -25,6 +25,9 @@ System.register(["angular2/core", "./mock-bookmark"], function(exports_1) {
                 BookmarkService.prototype.getBookmarks = function () {
                     return Promise.resolve(mock_bookmark_1.BOOKMARKS);
                 };
+                BookmarkService.prototype.insertBookmark = function (bookmark) {
+                    Promise.resolve(mock_bookmark_1.BOOKMARKS).then(function (bookmarks) { return bookmarks.push(bookmark); });
+                };
                 BookmarkService = __decorate([
                     core_1.Injectable(), 
                     __metadata('design:paramtypes', [])

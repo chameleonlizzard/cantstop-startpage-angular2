@@ -26,7 +26,26 @@ System.register(["angular2/core", "./bookmark.component", "./bookmark.service"],
                 function BookmarkListComponent(_bookmarkService) {
                     this._bookmarkService = _bookmarkService;
                     this.selectedBookmark = {};
+                    this.showTools = false;
                 }
+                BookmarkListComponent.prototype.toggleTools = function () {
+                    if (!this.showTools) {
+                        if (this.toggleToolsPass()) {
+                            this.showTools = true;
+                            return true;
+                        }
+                        return false;
+                    }
+                    this.showTools = false;
+                };
+                BookmarkListComponent.prototype.toggleToolsPass = function () {
+                    var pass = prompt('Om de instellingen aan te passen moet je een wachtwoord invullen:', '');
+                    if (pass !== 'yes') {
+                        alert("Onjuist wachtwoord, je kan de instellingen niet aanpassen");
+                        return false;
+                    }
+                    return true;
+                };
                 BookmarkListComponent.prototype.onSelect = function (bookmark) {
                     this.selectedBookmark = bookmark;
                 };
@@ -40,9 +59,10 @@ System.register(["angular2/core", "./bookmark.component", "./bookmark.service"],
                 BookmarkListComponent = __decorate([
                     core_1.Component({
                         selector: 'bookmark-list',
-                        template: "\n    <div class=\"col-md-4\">\n    <table class=\"table\">\n        <tr *ngFor=\"#bookmark of bookmarks\" (click)=\"onSelect(bookmark)\" [class.text-danger]=\"selectedBookmark === bookmark\">\n            <td>{{bookmark.title}}</td>\n        </tr>\n    </table>\n    </div>\n    <bookmark [bookmark]=\"selectedBookmark\" class=\"col-md-8\"></bookmark>\n    ",
+                        template: "\n    <div class=\"col-md-6\">\n        <div class=\"panel panel-info\">\n          <div class=\"panel-heading\">\n            <h3 class=\"panel-title\">Bookmarks <i class=\"pull-right glyphicon glyphicon-cog\" (click)=\"toggleTools()\"></i></h3>\n          </div>\n          <div class=\"panel-body\">\n            <table class=\"table table-striped\">\n                <tr *ngFor=\"#bookmark of bookmarks\">\n                    <td><a href=\"{{bookmark.url}}\">{{bookmark.title}}</a></td>\n                    <td>\n                        <span [class.hidden]=\"showTools === false\">\n                            <i class=\"glyphicon glyphicon-edit pull-right\" (click)=\"onSelect(bookmark)\" data-toggle=\"modal\" data-target=\"#myModal\"></i>\n                        </span>\n                     </td>\n                </tr>\n            </table>\n          </div>\n        </div>\n    </div>\n    <div class=\"modal fade\" id=\"myModal\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"myModalLabel\">\n      <div class=\"modal-dialog\" role=\"document\">\n        <div class=\"modal-content\">\n\n        <div class=\"modal-body\">\n            <bookmark [bookmark]=\"selectedBookmark\"></bookmark>\n          </div>\n          <div class=\"modal-footer\">\n            <button type=\"button\" class=\"btn btn-default\" data-dismiss=\"modal\">Close</button>\n            <button type=\"button\" class=\"btn btn-primary\" data-dismiss=\"modal\">Save changes</button>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    ",
                         directives: [bookmark_component_1.BookmarkComponent],
-                        providers: [bookmark_service_1.BookmarkService]
+                        providers: [bookmark_service_1.BookmarkService],
+                        styleUrls: ["src/css/bookmark-list.css"]
                     }), 
                     __metadata('design:paramtypes', [bookmark_service_1.BookmarkService])
                 ], BookmarkListComponent);
