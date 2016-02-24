@@ -25,12 +25,12 @@ System.register(["angular2/core", "angular2/router"], function(exports_1) {
                     this.bookmark = null;
                 }
                 BookmarkComponent.prototype.onCreateNew = function () {
-                    this._router.navigate(['NewBookmark', { userId: this.bookmark.userId }]);
+                    this._router.navigate(['BookmarkAdd', {}]);
                 };
                 BookmarkComponent = __decorate([
                     core_1.Component({
                         selector: 'bookmark',
-                        template: "\n    <div class=\"\">\n        <button class=\"btn btn-default btn-raised pull-right\" (click)=\"onCreateNew()\" data-dismiss=\"modal\"><i class=\"glyphicon glyphicon-copy\"></i> Copy Bookmark</button>\n    </div>\n    <form class=\"form-horizontal\">\n        <fieldset>\n            <legend>Bookmark Aanpassen</legend>\n            <div class=\"form-group\">\n                <label for=\"inputTitle\" class=\"col-md-3 control-label\">Nummer</label>\n                <div class=\"col-md-9\">\n                    <input type=\"text\" class=\"form-control\" id=\"inputTitle\" placeholder=\"Title\" disabled [(ngModel)]=\"bookmark.favId\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"inputTitle\" class=\"col-md-3 control-label\">Title</label>\n                <div class=\"col-md-9\">\n                    <input type=\"text\" class=\"form-control\" id=\"inputTitle\" placeholder=\"Title\" [(ngModel)]=\"bookmark.title\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"inputTitle\" class=\"col-md-3 control-label\">Link</label>\n                <div class=\"col-md-9\">\n                    <input type=\"text\" class=\"form-control\" id=\"inputTitle\" placeholder=\"Title\" [(ngModel)]=\"bookmark.url\">\n                </div>\n            </div>\n            <div class=\"form-group\">\n                <label for=\"inputTitle\" class=\"col-md-3 control-label\">Gebruiker</label>\n                <div class=\"col-md-9\">\n                    <input type=\"text\" class=\"form-control\" id=\"inputTitle\" placeholder=\"Title\" [(ngModel)]=\"bookmark.userId\">\n                </div>\n            </div>\n        </fieldset>\n    </form>\n\n    ",
+                        templateUrl: "app/bookmarks/bookmark.html",
                         inputs: ["bookmark"]
                     }), 
                     __metadata('design:paramtypes', [router_1.Router])
